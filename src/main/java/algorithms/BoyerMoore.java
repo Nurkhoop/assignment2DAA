@@ -8,9 +8,7 @@ public class BoyerMoore {
             return null;
         }
 
-        // шаг 1: находим кандидата
         int candidate = findCandidate(arr, tracker);
-        // шаг 2: проверяем, правда ли он большинство
         if (isMajority(arr, candidate, tracker)) {
             return candidate;
         }
@@ -22,12 +20,12 @@ public class BoyerMoore {
         int candidate = -1;
 
         for (int i = 0; i < arr.length; i++) {
-            tracker.addAccess(); // доступ к arr[i]
+            tracker.addAccess();
             if (count == 0) {
                 candidate = arr[i];
                 count = 1;
             } else {
-                tracker.addComparison(); // сравнение arr[i] == candidate
+                tracker.addComparison();
                 if (arr[i] == candidate) {
                     count++;
                 } else {

@@ -14,11 +14,9 @@ public class BenchmarkRunner {
         writer.write("ArraySize,Type,Time(ns),Comparisons,Accesses,Majority\n");
 
         for (int size : sizes) {
-            // 1. Случайный массив
             int[] randomArray = generateRandomArray(size);
             runBenchmark(writer, randomArray, "Random");
 
-            // 2. Массив с большинством
             int[] majorityArray = generateArrayWithMajority(size);
             runBenchmark(writer, majorityArray, "WithMajority");
         }
@@ -55,11 +53,9 @@ public class BenchmarkRunner {
         int majority = rand.nextInt(10);
         int[] arr = new int[n];
 
-        // первые 60% делаем одинаковыми
         for (int i = 0; i < n * 0.6; i++) {
             arr[i] = majority;
         }
-        // остальные случайные
         for (int i = (int)(n * 0.6); i < n; i++) {
             arr[i] = rand.nextInt(10);
         }
