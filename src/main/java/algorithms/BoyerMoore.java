@@ -3,21 +3,24 @@ package algorithms;
 import metrics.PerformanceTracker;
 
 public class BoyerMoore {
+
     public static Integer findMajority(int[] arr, PerformanceTracker tracker) {
         if (arr == null || arr.length == 0) {
             return null;
         }
 
         int candidate = findCandidate(arr, tracker);
+
         if (isMajority(arr, candidate, tracker)) {
             return candidate;
         }
+
         return null;
     }
 
     private static int findCandidate(int[] arr, PerformanceTracker tracker) {
         int count = 0;
-        int candidate = -1;
+        int candidate = arr[0];
 
         for (int i = 0; i < arr.length; i++) {
             tracker.addAccess();
@@ -38,13 +41,19 @@ public class BoyerMoore {
 
     private static boolean isMajority(int[] arr, int candidate, PerformanceTracker tracker) {
         int count = 0;
-        for (int i = 0; i < arr.length; i++) {
+        int n = arr.length;
+
+        for (int i = 0; i < n; i++) {
             tracker.addAccess();
             tracker.addComparison();
             if (arr[i] == candidate) {
                 count++;
+                if (count > n / 2) {
+                    return true;
+                }
             }
         }
-        return count > arr.length / 2;
+
+        return false;
     }
 }
